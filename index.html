@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+ 
+ <script>
+  // losowe pastelowe tło
+  function randomColor() {
+    const h = Math.floor(Math.random() * 360)
+    return `hsl(${h}, 80%, 85%)`
+  }
+
+  const quotes = [
+    "Życie jest za krótkie, by jeździć wolno.",
+    "Rodzina to siła.",
+    "Najlepszy tuning to pasja.",
+    "Poczuj drogę, a nie liczby.",
+    "Silnik to serce samochodu."
+  ]
+
+  window.onload = () => {
+    
+    document.getElementById("quoteBox").innerText =
+      quotes[Math.floor(Math.random() * quotes.length)]
+
+    
+    const saved = localStorage.getItem("nameFF")
+    if (saved) {
+      document.getElementById("helloText").innerText =
+        "Witaj ponownie, " + saved + "!"
+    }
+
+    document.getElementById("bgBtn").onclick = () => {
+      document.body.style.background = randomColor()
+    }
+
+   
+    let dark = false
+    document.getElementById("themeBtn").onclick = () => {
+      dark = !dark
+      document.body.style.background = dark ? "#111" : randomColor()
+      document.body.style.color = dark ? "white" : "black"
+    }
+
+   
+    document.getElementById("nameBtn").onclick = () => {
+      const name = prompt("Jak masz na imię?")
+      if (name) {
+        localStorage.setItem("nameFF", name)
+        document.getElementById("helloText").innerText =
+          "Witaj ponownie, " + name + "!"
+      }
+    }
+  }
+</script>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
